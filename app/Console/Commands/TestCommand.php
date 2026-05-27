@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Domain\Notifications\Models\Notification;
+use App\Domain\Notifications\Services\SmsNotificationSender;
 use App\DTO\UserData;
-use App\Models\Notification;
-use App\Services\SmsNotificationSender;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command

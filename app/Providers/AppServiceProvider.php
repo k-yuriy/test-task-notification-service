@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\SMSGateway\Mock\SMSGatewayMock;
-use App\SMSGateway\SMSGatewayInterface;
+use App\Domain\Notifications\Gateways\SMSGateway\Mock\SMSGatewayMock;
+use App\Domain\Notifications\Gateways\SMSGateway\SMSGatewayInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

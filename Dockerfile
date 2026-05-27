@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    && docker-php-ext-install pdo pdo_pgsql sockets
+    supervisor \
+    && docker-php-ext-install pdo pdo_pgsql sockets pcntl
 
 # composer
 

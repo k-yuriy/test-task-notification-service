@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\DTO\NotificationPackageData;
-use App\DTO\ReceiverData;
-use App\Enums\NotificationChannel;
-use App\Enums\NotificationPriority;
+use App\Domain\Notifications\DTO\NotificationPackageData;
+use App\Domain\Notifications\DTO\ReceiverData;
+use App\Domain\Notifications\Enums\NotificationChannel;
+use App\Domain\Notifications\Enums\NotificationPriority;
+use App\Domain\Notifications\UseCases\CreateNotificationPackageUseCase;
 use App\Http\Requests\CreateNotificationPackageRequest;
 use App\Http\Resources\NotificationPackageResource;
-use App\UseCases\CreateNotificationPackageUseCase;
 
 class NotificationPackageController extends BaseController
 {

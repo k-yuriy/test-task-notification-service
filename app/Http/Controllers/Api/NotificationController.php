@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Domain\Notifications\UseCases\GetNotificationsByReceiverIdUseCase;
 use App\Http\Resources\NotificationResource;
-use App\UseCases\GetNotificationsByReceiverIdUseCase;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class NotificationController extends BaseController

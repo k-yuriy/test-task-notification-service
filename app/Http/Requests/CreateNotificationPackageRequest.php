@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 
-use App\Enums\NotificationChannel;
-use App\Enums\NotificationPriority;
-use App\Models\Notification;
-use App\Models\NotificationPackage;
+use App\Domain\Notifications\Enums\NotificationChannel;
+use App\Domain\Notifications\Enums\NotificationPriority;
+use App\Domain\Notifications\Models\Notification;
+use App\Domain\Notifications\Models\NotificationPackage;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Validator;
 

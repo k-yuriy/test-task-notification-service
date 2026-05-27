@@ -19,7 +19,24 @@ services:
       - rabbitmq
     networks:
       - notification-network
-
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: 501
+        GID: 20
+    volumes:
+      - .:/var/www
+      - ./docker/supervisor/queue-worker.conf:/etc/supervisor/conf.d/queue-worker.conf
+    working_dir: /var/www
+    command: supervisord -n -c /etc/supervisor/conf.d/queue-worker.conf
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    networks:
+      - notification-network
   nginx:
     image: nginx:alpine
     ports:
