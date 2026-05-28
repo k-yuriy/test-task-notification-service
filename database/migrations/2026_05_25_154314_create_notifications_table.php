@@ -15,9 +15,15 @@ return new class extends Migration {
             $table->foreignId('notification_package_id')->constrained('notification_packages');
             $table->string('receiver');
             $table->string('status');
-            $table->integer('attempt_count')->default(0);
+            $table->unsignedSmallInteger('attempt_count')->default(0);
             $table->string('last_error_message')->nullable();
+
+            $table->timestamp('next_status_check_at')->nullable();
+            $table->unsignedSmallInteger('status_check_count')->default(0);
+            $table->timestamp('last_status_checked_at')->nullable();
             $table->timestamps();
+
+            $table->index(['status', 'next_status_check_at']);
         });
     }
 

@@ -16,6 +16,11 @@ enum NotificationStatus: string
         return $this === self::Queued;
     }
 
+    public function isSent(): bool
+    {
+        return $this === self::Sent;
+    }
+
     public function isError(): bool
     {
         return $this === self::Error;

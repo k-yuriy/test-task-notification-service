@@ -43,14 +43,14 @@ class CreateNotificationPackageRequest extends BaseFormRequest
             $notifications = $this->input('data.relationships.notifications.data', []);
             foreach ($notifications as $index => $notification) {
                 $receiver = $notification['receiver'] ?? null;
-                if ($channel === NotificationChannel::Email && !filter_var($receiver, FILTER_VALIDATE_EMAIL)) {
+                if ($channel === NotificationChannel::Email->value && !filter_var($receiver, FILTER_VALIDATE_EMAIL)) {
                     $validator->errors()->add(
                         "data.relationships.notifications.data.$index.receiver",
                         'The receiver must be a valid email address when channel is email.'
                     );
                 }
 
-                if ($channel === NotificationChannel::Sms && !$this->isValidPhone($receiver)) {
+                if ($channel === NotificationChannel::Sms->value && !$this->isValidPhone($receiver)) {
                     $validator->errors()->add(
                         "data.relationships.notifications.data.$index.receiver",
                         'The receiver must be a valid phone number when channel is sms.'

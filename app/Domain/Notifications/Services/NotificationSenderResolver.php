@@ -6,7 +6,6 @@ namespace App\Domain\Notifications\Services;
 
 use App\Domain\Notifications\Enums\NotificationChannel;
 use App\Domain\Notifications\Exceptions\InvalidArgumentException;
-use App\Domain\Notifications\Interfaces\NotificationSenderInterface;
 
 final readonly class NotificationSenderResolver
 {

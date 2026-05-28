@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Notifications\Gateways\SMSGateway\Mock;
+namespace App\Domain\Notifications\Gateways\EmailGateway\Mock;
 
-use App\Domain\Notifications\DTO\SmsReceiverData;
+use App\Domain\Notifications\DTO\EmailReceiverData;
 use App\Domain\Notifications\Gateways\CheckDeliveryStatusGatewayResultInterface;
+use App\Domain\Notifications\Gateways\EmailGateway\EmailGatewayInterface;
 use App\Domain\Notifications\Gateways\SendNotificationGatewayResultInterface;
-use App\Domain\Notifications\Gateways\SMSGateway\SMSGatewayInterface;
 
-class SMSGatewayMock implements SMSGatewayInterface
+class EmailGatewayMock implements EmailGatewayInterface
 {
 
-    public function send(SmsReceiverData $receiver, string $text): SendNotificationGatewayResultInterface
+    public function send(EmailReceiverData $receiver, string $text): SendNotificationGatewayResultInterface
     {
         return SendNotificationGatewayResultGenerator::random();
     }

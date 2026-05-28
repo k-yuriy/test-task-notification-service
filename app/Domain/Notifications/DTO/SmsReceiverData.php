@@ -12,7 +12,7 @@ use Spatie\LaravelData\Data;
 class SmsReceiverData extends Data
 {
 
-    //TODO подумать что делать с регвыром на номер телефона
+    //TODO регвыр участвует два раза тут и в реквесте
     public function __construct(
         #[Required]
         #[StringType]

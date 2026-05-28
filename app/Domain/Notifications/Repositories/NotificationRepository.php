@@ -11,14 +11,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class NotificationRepository
 {
-    /**
-     * @param ReceiverData $receivers
-     */
-    public function create(int $packageId, array $receivers)
-    {
-        // TODO
-    }
-
     public function getById(int $id): Notification
     {
         return Notification::query()->with('package')->findOrFail($id);
@@ -66,15 +58,52 @@ class NotificationRepository
     public function changeStatusToSent(Notification $notification): void
     {
         $notification->update([
-            'status'        => NotificationStatus::Sent->value,
+            'status'               => NotificationStatus::Sent,
+            'next_status_check_at' => now()->addMinute()
         ]);
     }
 
     public function changeStatusToError(Notification $notification, $errorMessage): void
     {
         $notification->update([
-            'status'             => NotificationStatus::Error->value,
+            'status'             => NotificationStatus::Error,
             'last_error_message' => $errorMessage,
+        ]);
+    }
+
+    public function changeStatusToDelivered(Notification $notification): void
+    {
+        $notification->update([
+            'status' => NotificationStatus::Delivered->value,
+        ]);
+    }
+
+    public function setNextStatusCheck(Notification $notification): void
+    {
+        $notification->update([
+            'next_status_check_at' => now()->addMinute()
+        ]);
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotificationsForCheckStatuses(): Collection
+    {
+        return Notification::query()
+            ->where('status', NotificationStatus::Sent)
+            ->whereNotNull('next_status_check_at')
+            ->where('next_status_check_at', '<=', now())
+            ->orderBy('id')
+            ->limit(500)
+            ->get();
+    }
+
+    public function prepareToCheckStatus(Notification $notification): void
+    {
+        $notification->update([
+            'next_status_check_at' => null,
+            'status_check_count' => $notification->status_check_count + 1
         ]);
     }
 }

@@ -15,10 +15,14 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property int $notification_package_id
  * @property string $receiver
+ * @property string $last_error_message
  * @property NotificationStatus $status
  * @property int $attempt_count
+ * @property int $status_check_count
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property Carbon|null $last_status_checked_at
+ * @property Carbon|null $next_status_check_at
  *
  * @relations
  * @property-read NotificationPackage $package
@@ -46,13 +50,18 @@ class Notification extends Model
         'receiver',
         'status',
         'attempt_count',
-        'last_error_message'
+        'last_error_message',
+        'next_status_check_at',
+        'status_check_count',
+        'last_status_checked_at'
     ];
 
     protected function casts(): array
     {
         return [
             'status' => NotificationStatus::class,
+            'next_status_check_at' => 'datetime',
+            'last_status_checked_at' => 'datetime',
         ];
     }
 
